@@ -10,7 +10,15 @@ import json
 # not working
 # TODO: env vars
 # nvidia gpu for faster training
-device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+# WHY ISSSSS IT NOT WRKINGGGG
+print(f"CUDA available: {torch.cuda.is_available()}")
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    print(f"GPU name: {torch.cuda.get_device_name(0)}")
+    print(f"Current device: {torch.cuda.current_device()}")
+else:
+    device = torch.device("cpu")
+print(f"Using device: {device}")
 
 with open('message.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
