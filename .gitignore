@@ -1,2 +1,5 @@
 /logs
 /results
+/mlruns
+
+test.py
