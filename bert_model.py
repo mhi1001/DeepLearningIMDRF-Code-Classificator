@@ -118,8 +118,6 @@ trainer.train()
 results = trainer.evaluate()
 print("Evaluation results:", results)
 
-
-
 # Function to get top 5 predictions
 def get_top_5_predictions(text):
     tokens = tokenizer.encode(text, add_special_tokens=True, max_length=512, truncation=True)
