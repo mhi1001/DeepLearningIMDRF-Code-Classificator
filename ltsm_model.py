@@ -57,8 +57,8 @@ model.add(Dense(len(label_to_id), activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # Train the model
-history = model.fit(X_train, y_train, epochs=30, batch_size=32, validation_data=(X_test, y_test))
-
+# according to the graphs around 15 epochs is alright
+history = model.fit(X_train, y_train, epochs=15, batch_size=32, validation_data=(X_test, y_test))
 
 loss, accuracy = model.evaluate(X_test, y_test)
 print(f'Accuracy: {accuracy}')
@@ -80,3 +80,29 @@ plt.title('Model loss')
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Validation'], loc='upper left')
+
+plt.tight_layout()
+plt.show()
+
+# Get top 5 codes - with percentage for debugging
+def get_top_5_predictions(text):
+    sequence = tokenizer.texts_to_sequences([text])
+    padded_sequence = pad_sequences(sequence, maxlen=100)
+    pred_probs = model.predict(padded_sequence)[0]
+    
+    top_5_indices = pred_probs.argsort()[-5:][::-1]
+    top_5_probs = pred_probs[top_5_indices]
+    
+    id_to_label = {v: k for k, v in label_to_id.items()}
+    top_5_codes = [id_to_label[idx] for idx in top_5_indices]
+    
+    return top_5_codes, top_5_probs
+
+# Interaction loop
+while True:
+    text_input = input("Enter a description (or 'exit' to quit): ")
+    if text_input.lower() == 'exit':
+        break
+    top_5_codes, top_5_probs = get_top_5_predictions(text_input)
+    print("Top 5 codes:", top_5_codes)
+    print("Probabilities:", top_5_probs)
