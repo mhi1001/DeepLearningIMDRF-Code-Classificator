@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 from sklearn.model_selection import train_test_split
+import tensorflow
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.utils import to_categorical
@@ -34,6 +35,7 @@ data_df['text'] = data_df['term'] + ' ' + data_df['definition']
 label_to_id = {label: i for i, label in enumerate(data_df['code'].unique())}
 data_df['label'] = data_df['code'].apply(lambda x: label_to_id[x])
 
+print(f"[DEBUG] {data_df['label']}")
 # Tokenize text
 tokenizer = Tokenizer(num_words=5000, oov_token="<OOV>")
 tokenizer.fit_on_texts(data_df['text'].values)
@@ -42,6 +44,7 @@ tokenizer.fit_on_texts(data_df['text'].values)
 sequences = tokenizer.texts_to_sequences(data_df['text'].values)
 padded_sequences = pad_sequences(sequences, maxlen=100)
 
+print(f"[DEBUG] {padded_sequences}")
 # Prepare labels
 labels = to_categorical(data_df['label'].values)
 # Split data
@@ -49,16 +52,18 @@ X_train, X_test, y_train, y_test = train_test_split(padded_sequences, labels, te
 
 model = Sequential()
 model.add(Embedding(input_dim=5000, output_dim=64, input_length=100))
-model.add(LSTM(128, return_sequences=True))
-model.add(LSTM(64))
-model.add(Dropout(0.5))
+model.add(LSTM(64, return_sequences=True))
+model.add(LSTM(32))
+model.add(Dropout(0.3))
 model.add(Dense(len(label_to_id), activation='softmax'))
 
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+print(f"[DEBUG] {model.summary()}")
+
+optimizer = tensorflow.keras.optimizers.Adam(learning_rate=0.001)
+model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
 # Train the model
-# according to the graphs around 15 epochs is alright
-history = model.fit(X_train, y_train, epochs=15, batch_size=32, validation_data=(X_test, y_test))
+history = model.fit(X_train, y_train, epochs=30, batch_size=32, validation_data=(X_test, y_test), verbose=1)
 
 loss, accuracy = model.evaluate(X_test, y_test)
 print(f'Accuracy: {accuracy}')
