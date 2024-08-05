@@ -68,13 +68,6 @@ However, manually identifying the correct IMDRF codes from doctors' messages is 
     pip install -r requirements.txt
     ```
 
-4. **Download the trained model and scaler files:**
-
-    Ensure you have the trained model (`diabetes_logistic_model.pkl`). Place it in the root directory of the folder.
-
-5. **Create and populate the `label_encoder_classes` files:**
-
-    Ensure you have the `label_encoder_diabetes_classes.npy` file. Place it in the root directory of the folder.
 
 ## Running the Application
 
@@ -92,6 +85,6 @@ However, manually identifying the correct IMDRF codes from doctors' messages is 
 
 ## Usage
 
-1. Fill out the form with the required health metrics and personal information.
-2. Click the "Predict" button.
-3. The prediction result will be displayed on the page.
+1. aa
+2. aa
+3. T
