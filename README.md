@@ -23,14 +23,13 @@ However, manually identifying the correct IMDRF codes from doctors' messages is 
 **Solution**: To create an app that assists companies in identifying the appropriate IMDRF codes for messages sent by doctors.
 
 **Research Questions:**
-- How accurately can the AI model classify doctors' messages into the correct IMDRF codes compared to human classification?
+- How accurately can the AI model classify doctors' messages into the correct IMDRF codes?
 - What are the most common errors made by the AI model in identifying IMDRF codes from doctors' messages?
-- Can the AI model adapt to new medical terminology and updates in IMDRF codes over time?
+- Which model is better suited for predicting IMDRF codes?
 
 **Hypotheses:**
-- The AI model will classify doctors' messages into the correct IMDRF codes with an accuracy rate of at least 90%, comparable to or better than human classification.
+- The AI model will classify doctors' messages into the correct IMDRF codes with an accuracy rate of at least 90%.
 - The most common errors made by the AI model will be related to ambiguous or highly specialized medical terminology.
-- The AI model will demonstrate the ability to adapt to new medical terms and IMDRF code updates with minimal additional training.
 
 ## Requirements
 
