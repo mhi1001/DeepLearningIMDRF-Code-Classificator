@@ -18,6 +18,9 @@ if torch.cuda.is_available():
 print(f"Using device: {device}")
 ######################################################################################
 
+MODEL_DIR = 'bert_model'
+MODEL_PATH = os.path.join(MODEL_DIR, 'bert_model')
+
 with open('message.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
@@ -87,36 +90,48 @@ def compute_metrics(pred):
         'recall': recall
     }
 
-# Training args
-training_args = TrainingArguments(
-    output_dir='./results',
-    # Number of epochs
-    num_train_epochs=10,  
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
-    warmup_steps=500,
-    learning_rate=1e-5,  
-    weight_decay=0.01,
-    logging_dir='./logs',
-    report_to="none",
-    # Evaluate at each epoch
-    evaluation_strategy="epoch",  
-)
+if os.path.exists(MODEL_PATH):
+    print("Loading existing BERT model...")
+    model = BertForSequenceClassification.from_pretrained(MODEL_PATH)
+    model.to(device)
+else:
+    print("Training new BERT model...")
+    model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=len(label_to_id))
+    model.to(device)
+    # Training args
+    training_args = TrainingArguments(
+        output_dir='./results',
+        # Number of epochs
+        num_train_epochs=10,  
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=8,
+        warmup_steps=500,
+        learning_rate=1e-5,  
+        weight_decay=0.01,
+        logging_dir='./logs',
+        report_to="none",
+        # Evaluate at each epoch
+        evaluation_strategy="epoch",  
+    )
 
-# Trainer
-trainer = Trainer(
-    model=model,
-    args=training_args,
-    train_dataset=train_dataset,
-    eval_dataset=test_dataset,
-    data_collator=data_collator,
-    compute_metrics=compute_metrics,
-)
+    # Trainer
+    trainer = Trainer(
+        model=model,
+        args=training_args,
+        train_dataset=train_dataset,
+        eval_dataset=test_dataset,
+        data_collator=data_collator,
+        compute_metrics=compute_metrics,
+    )
 
-# Train and evaluate the model
-trainer.train()
-results = trainer.evaluate()
-print("Evaluation results:", results)
+    # Train and evaluate the model
+    trainer.train()
+    results = trainer.evaluate()
+    print("Evaluation results:", results)
+
+    os.makedirs(MODEL_DIR, exist_ok=True)
+    model.save_pretrained(MODEL_PATH)
+    print(f"Model saved to {MODEL_PATH}")
 
 # Function to get top 5 predictions
 def get_top_5_predictions(text):

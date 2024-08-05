@@ -8,6 +8,7 @@ from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout
 import matplotlib.pyplot as plt
+import os
 
 with open('message.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
@@ -24,6 +25,9 @@ for entry in data:
         definitions = [definitions]
     for definition in definitions:
         expanded_data.append({'code': code, 'term': term, 'definition': definition})
+
+MODEL_DIR = 'lstm_model'
+MODEL_PATH = os.path.join(MODEL_DIR, 'lstm_model.keras')
 
 
 data_df = pd.DataFrame(expanded_data)
@@ -50,44 +54,55 @@ labels = to_categorical(data_df['label'].values)
 # Split data
 X_train, X_test, y_train, y_test = train_test_split(padded_sequences, labels, test_size=0.2, random_state=42)
 
-model = Sequential()
-model.add(Embedding(input_dim=5000, output_dim=64, input_length=100))
-model.add(LSTM(64, return_sequences=True))
-model.add(LSTM(32))
-model.add(Dropout(0.3))
-model.add(Dense(len(label_to_id), activation='softmax'))
+if os.path.exists(MODEL_PATH):
+    print("Loading existing LSTM model...")
+    model = tensorflow.keras.models.load_model(MODEL_PATH)
+    print(f"[DEBUG] {model.summary()}")
+else:
+    print("Training new LSTM model...")
 
-print(f"[DEBUG] {model.summary()}")
+    model = Sequential()
+    model.add(Embedding(input_dim=5000, output_dim=64, input_length=100))
+    model.add(LSTM(64, return_sequences=True))
+    model.add(LSTM(32))
+    model.add(Dropout(0.3))
+    model.add(Dense(len(label_to_id), activation='softmax'))
 
-optimizer = tensorflow.keras.optimizers.Adam(learning_rate=0.001)
-model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
+    print(f"[DEBUG] {model.summary()}")
 
-# Train the model
-history = model.fit(X_train, y_train, epochs=30, batch_size=32, validation_data=(X_test, y_test), verbose=1)
+    optimizer = tensorflow.keras.optimizers.Adam(learning_rate=0.001)
+    model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
-loss, accuracy = model.evaluate(X_test, y_test)
-print(f'Accuracy: {accuracy}')
+    # Train the model
+    history = model.fit(X_train, y_train, epochs=30, batch_size=32, validation_data=(X_test, y_test), verbose=1)
 
-# Accuracy, losss
-plt.figure(figsize=(12, 6))
-plt.subplot(1, 2, 1)
-plt.plot(history.history['accuracy'])
-plt.plot(history.history['val_accuracy'])
-plt.title('Model accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Validation'], loc='upper left')
+    loss, accuracy = model.evaluate(X_test, y_test)
+    print(f'Accuracy: {accuracy}')
 
-plt.subplot(1, 2, 2)
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('Model loss')
-plt.ylabel('Loss')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Validation'], loc='upper left')
+    # Accuracy, losss
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1)
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Validation'], loc='upper left')
 
-plt.tight_layout()
-plt.show()
+    plt.subplot(1, 2, 2)
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Validation'], loc='upper left')
+
+    plt.tight_layout()
+    plt.show()
+
+    os.makedirs(MODEL_DIR, exist_ok=True)
+    model.save(MODEL_PATH)
+    print(f"Model saved to {MODEL_PATH}")
 
 # Get top 5 codes - with percentage for debugging
 def get_top_5_predictions(text):

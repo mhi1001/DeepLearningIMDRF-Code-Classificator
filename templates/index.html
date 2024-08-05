@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Classifier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Complaint Classifier</a>
+            <div class="navbar-nav">
+                <a class="nav-link active" href="#" data-model="bert">BERT Model</a>
+                <a class="nav-link" href="#" data-model="lstm">LSTM Model</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2>Enter your complaint:</h2>
+                <textarea id="complaint-text" class="form-control mb-3" rows="5"></textarea>
+                <button id="classify-btn" class="btn btn-primary">Classify</button>
+                <div id="result" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentModel = 'bert';
+
+        document.querySelectorAll('.navbar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentModel = this.dataset.model;
+                document.querySelectorAll('.navbar-nav a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.getElementById('classify-btn').addEventListener('click', function() {
+            const text = document.getElementById('complaint-text').value;
+            if (text.trim() === '') {
+                alert('Please enter a complaint.');
+                return;
+            }
+
+            fetch('/classify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text, model_type: currentModel }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                let resultHtml = '<h3>Top 5 Classifications:</h3><ul>';
+                for (let i = 0; i < data.codes.length; i++) {
+                    resultHtml += `<li>${data.codes[i]}: ${(data.probabilities[i] * 100).toFixed(2)}%</li>`;
+                }
+                resultHtml += '</ul>';
+                document.getElementById('result').innerHTML = resultHtml;
+            })
+            .catch(error => {
+                
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = '<p class="text-danger">An error occurred. Please try again.</p>';
+            });
+        });
+    </script>
+</body>
+</html>
