@@ -1,7 +1,7 @@
 /logs
 /results
 /mlruns
-/bert_model/model.safetensors
+model.safetensors
 /lstm_model
 
 test.py
