@@ -4,6 +4,7 @@ matplotlib
 numpy
 pandas
 scikit_learn
+seaborn
 tensorflow
 tensorflow_intel
 torch
