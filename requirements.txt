@@ -1,0 +1,10 @@
+Flask
+joblib
+matplotlib
+numpy
+pandas
+scikit_learn
+tensorflow
+tensorflow_intel
+torch
+transformers
