@@ -4,10 +4,11 @@ from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
 from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments, DataCollatorWithPadding
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 import json
-import argparse
 import os
+import joblib
 
 ######################Dont touch -  use gpu for faster training###################
 print(f"CUDA available: {torch.cuda.is_available()}")
@@ -21,35 +22,24 @@ print(f"Using device: {device}")
 MODEL_DIR = 'bert_model'
 MODEL_PATH = os.path.join(MODEL_DIR, 'bert_model')
 
+# Load dataset
 with open('message.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
-# 1 entry for 1 definition in  the dataset
-#{'code': 'A0101', 'term': 'Patient-Device Incompatibility', 'definition': 'The patient experienced severe discomfort due to the device not aligning with their anatomy.'}
-#{'code': 'A0101', 'term': 'Patient-Device Incompatibility', 'definition': "Complications arose because the device did not interact well with the patient's physiological condition."}
-expanded_data = []
-for entry in data:
-    code = entry['code']
-    term = entry['term']
-    definitions = entry['definition']
-    if not isinstance(definitions, list):
-        definitions = [definitions]
-    for definition in definitions:
-        expanded_data.append({'code': code, 'term': term, 'definition': definition})
+data_df = pd.DataFrame(data)
+print(data_df)
+data_df = data_df.explode('definition')
+# Reset index
+data_df = data_df.reset_index(drop=True)
+print(data_df)
 
-# Convert to DataFrame
-data_df = pd.DataFrame(expanded_data)
-
-# Combine term and definition into a single text field
-data_df['text'] = data_df['term'] + ' ' + data_df['definition']
-
-# Encode labels
-label_to_id = {label: i for i, label in enumerate(data_df['code'].unique())}
-data_df['label'] = data_df['code'].apply(lambda x: label_to_id[x])
+# Encode the "code" labels
+label_encoder = LabelEncoder()
+data_df['label'] = label_encoder.fit_transform(data_df['code'])
 
 # Tokenize text
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-data_df['tokens'] = data_df['text'].apply(lambda x: tokenizer.encode(x, add_special_tokens=True, max_length=512, truncation=True))
+data_df['tokens'] = data_df['definition'].apply(lambda x: tokenizer.encode(x, add_special_tokens=True, max_length=512, truncation=True))
 
 # Split data
 train_data, test_data = train_test_split(data_df, test_size=0.2, random_state=42)
@@ -72,7 +62,7 @@ test_dataset = Dataset(test_data)
 data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
 # Load bert-base-uncased
-model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=len(label_to_id))
+model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=len(label_encoder.classes_))
 
 # Move model to GPU if available
 model.to(device)
@@ -96,7 +86,7 @@ if os.path.exists(MODEL_PATH):
     model.to(device)
 else:
     print("Training new BERT model...")
-    model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=len(label_to_id))
+    model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=len(label_encoder.classes_))
     model.to(device)
     # Training args
     training_args = TrainingArguments(
@@ -131,31 +121,5 @@ else:
 
     os.makedirs(MODEL_DIR, exist_ok=True)
     model.save_pretrained(MODEL_PATH)
-    print(f"Model saved to {MODEL_PATH}")
-
-# Function to get top 5 predictions
-def get_top_5_predictions(text):
-    tokens = tokenizer.encode(text, add_special_tokens=True, max_length=512, truncation=True)
-
-    # Force model to use GPU...
-    input_ids = torch.tensor([tokens]).to(device)  
-    model.to(device)  
-    model.eval()
-
-    # Output top 5 codes for each query and their respective probability for debugging 
-    with torch.no_grad():
-        outputs = model(input_ids)
-
-    probabilities = torch.nn.functional.softmax(outputs.logits, dim=1)
-    top_5_probs, top_5_indices = torch.topk(probabilities, 5)
-    top_5_codes = [list(label_to_id.keys())[i] for i in top_5_indices[0]]
-    return top_5_codes, top_5_probs[0]
-
-# Interaction loop
-while True:
-    text_input = input("Enter a description (or 'exit' to quit): ")
-    if text_input.lower() == 'exit':
-        break
-    top_5_codes, top_5_probs = get_top_5_predictions(text_input)
-    print("Top 5 codes:", top_5_codes)
-    print("Probabilities:", top_5_probs)
+    joblib.dump(label_encoder, os.path.join(MODEL_DIR, 'label_encoder.joblib'))
+    print(f"Encoders saved to {MODEL_PATH}")

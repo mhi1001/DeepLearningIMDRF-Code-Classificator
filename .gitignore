@@ -2,6 +2,8 @@
 /results
 /mlruns
 model.safetensors
-/lstm_model
+lstm_model/
+bert_model/
+naivebayes_model/
 
 test.py
