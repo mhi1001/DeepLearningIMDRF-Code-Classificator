@@ -1,0 +1,422 @@
+[
+    {
+        "code": "A0101",
+        "definition": "The patient experienced severe discomfort due to the device not aligning with their anatomy."
+    },
+    {
+        "code": "A0101",
+        "definition": "Complications arose because the device did not interact well with the patient's physiological condition."
+    },
+    {
+        "code": "A0101",
+        "definition": "The patient reported significant pain as a result of the device not fitting their anatomy properly."
+    },
+    {
+        "code": "A0301",
+        "definition": "The patient experienced discomfort due to an unexpected smell released by the device"
+    },
+    {
+        "code": "A0301",
+        "definition": "The device emitted an inappropriate odor, causing concerns for the patient"
+    },
+    {
+        "code": "A0301",
+        "definition": "There was an unexpected smell from the device that disturbed the patient"
+    },
+    {
+        "code": "A0401",
+        "definition": "The patient experienced issues due to damage to the materials used in the device construction"
+    },
+    {
+        "code": "A0401",
+        "definition": "The device malfunctioned because of breakage in its materials"
+    },
+    {
+        "code": "A0401",
+        "definition": "We received complaints about undesired damage to the device materials"
+    },
+    {
+        "code": "A0501",
+        "definition": "The patient experienced issues due to the device separating from its physical construct"
+    },
+    {
+        "code": "A0501",
+        "definition": "The device malfunctioned because it detached from its chassis"
+    },
+    {
+        "code": "A0501",
+        "definition": "We received complaints about the device separating from its integrity"
+    },
+    {
+        "code": "A090401",
+        "definition": "The patient experienced issues due to the energy output from the device not being in the expected part of the spectrum"
+    },
+    {
+        "code": "A090401",
+        "definition": "The device malfunctioned because its energy output was outside the expected spectrum"
+    },
+    {
+        "code": "A090401",
+        "definition": "We received complaints about the device's energy output not aligning with the expected spectrum"
+    },
+    {
+        "code": "B01",
+        "definition": "The investigation employed relevant empirical testing of the actual device suspected in the reported adverse event in order to establish their functional and other properties and to identify possible causes for the adverse event"
+    },
+    {
+        "code": "B01",
+        "definition": "Relevant testing would typically be based on test methods used for evaluating safety and performance as described in the latest relevant standards"
+    },
+    {
+        "code": "B01",
+        "definition": "The device was subjected to empirical testing to identify the cause of the adverse event"
+    },
+    {
+        "code": "B03",
+        "definition": "The investigation employed relevant empirical testing of the device of the same lot or batch than that of the suspected device in the reported adverse event in order to support the identification of possible causes for the adverse event"
+    },
+    {
+        "code": "B03",
+        "definition": "The device was returned from the user"
+    },
+    {
+        "code": "B03",
+        "definition": "Relevant testing would typically be based on test methods used for evaluating safety and performance as described in the latest relevant standards"
+    },
+    {
+        "code": "B11",
+        "definition": "The investigation involved the analysis of historical adverse events data of the actual device involved in the adverse event and/or of products from the same and/or different batches/lots"
+    },
+    {
+        "code": "B11",
+        "definition": "The analysis included historical adverse events data of the actual device"
+    },
+    {
+        "code": "B11",
+        "definition": "Relevant data from products of the same or different batches/lots was analyzed"
+    },
+    {
+        "code": "B14",
+        "definition": "The investigation involved the analysis of relevant production records in view of supporting the identification of possible causes for the adverse event"
+    },
+    {
+        "code": "B14",
+        "definition": "Relevant production records were analyzed to support the investigation"
+    },
+    {
+        "code": "B14",
+        "definition": "The investigation included analyzing production records to identify potential causes of the adverse event"
+    },
+    {
+        "code": "B18",
+        "definition": "The actual device involved in the adverse event had been already discarded and thus irretrievably lost for testing"
+    },
+    {
+        "code": "B18",
+        "definition": "The device in question had already been discarded and was unavailable for testing"
+    },
+    {
+        "code": "B18",
+        "definition": "Testing was not possible as the device involved in the adverse event had already been discarded"
+    },
+    {
+        "code": "C0101",
+        "definition": "The device causes cellular or tissue responses that elicit an undesirable local or systemic effect in the recipient or beneficiary of that therapy"
+    },
+    {
+        "code": "C0101",
+        "definition": "Cellular or tissue responses caused by the device lead to undesirable effects in the recipient"
+    },
+    {
+        "code": "C0101",
+        "definition": "The device triggers cellular or tissue responses resulting in adverse local or systemic effects"
+    },
+    {
+        "code": "C0105",
+        "definition": "The device's ability to cause damage to genetic material (e.g. leading to malignant tumors)"
+    },
+    {
+        "code": "C0105",
+        "definition": "The device has the potential to damage genetic material, possibly leading to malignant tumors"
+    },
+    {
+        "code": "C0105",
+        "definition": "Damage to genetic material by the device could result in malignant tumors"
+    },
+    {
+        "code": "C0207",
+        "definition": "Problems related to the source that provides electrical power to the device"
+    },
+    {
+        "code": "C0207",
+        "definition": "Issues arise from the electrical power source supplying the device"
+    },
+    {
+        "code": "C0207",
+        "definition": "The device encounters problems due to its electrical power source"
+    },
+    {
+        "code": "C0401",
+        "definition": "Devices that do not send or receive adequate signals (this speaks to the interoperability between devices)"
+    },
+    {
+        "code": "C0401",
+        "definition": "The lack of adequate signal transmission or reception affects device interoperability"
+    },
+    {
+        "code": "C0401",
+        "definition": "Issues arise from devices failing to send or receive sufficient signals, impacting interoperability"
+    },
+    {
+        "code": "C070603",
+        "definition": "Problems caused by the separation of a component, object, or material into two or more pieces including shear"
+    },
+    {
+        "code": "C070603",
+        "definition": "Issues arise due to the separation of a component, object, or material into multiple pieces, including shear"
+    },
+    {
+        "code": "C070603",
+        "definition": "The separation of a component, object, or material into two or more pieces, including shear, leads to problems"
+    },
+    {
+        "code": "D0101",
+        "definition": "Problems traced to design/design features of the device that do not support or interfere with the intended purpose of the device"
+    },
+    {
+        "code": "D0101",
+        "definition": "Issues arise due to device design or features that do not support or interfere with its intended purpose"
+    },
+    {
+        "code": "D0101",
+        "definition": "The device's design or features cause problems by not supporting or interfering with its intended purpose"
+    },
+    {
+        "code": "D0107",
+        "definition": "Problems traced to inadequate protection of computers, servers, mobile devices, electronic systems, networks, programs, and data from malicious attacks, damage, or unauthorized access"
+    },
+    {
+        "code": "D0107",
+        "definition": "Issues arise due to inadequate protection of computers, servers, mobile devices, electronic systems, networks, programs, and data from malicious attacks, damage, or unauthorized access"
+    },
+    {
+        "code": "D0107",
+        "definition": "The lack of adequate protection for computers, servers, mobile devices, electronic systems, networks, programs, and data from malicious attacks, damage, or unauthorized access leads to problems"
+    },
+    {
+        "code": "D07",
+        "definition": "Problems traced to improper routine or preventative maintenance"
+    },
+    {
+        "code": "D07",
+        "definition": "Issues arise due to improper routine or preventative maintenance"
+    },
+    {
+        "code": "D07",
+        "definition": "The lack of proper routine or preventative maintenance leads to problems"
+    },
+    {
+        "code": "D1002",
+        "definition": "The adverse event occurred during the procedure and the device had no influence on the event"
+    },
+    {
+        "code": "D1002",
+        "definition": "The adverse event was unrelated to the device and occurred during the procedure"
+    },
+    {
+        "code": "D1002",
+        "definition": "The event occurred during the procedure, and the device played no role in causing it"
+    },
+    {
+        "code": "D1106",
+        "definition": "Problems traced to the use of the device more than once when it is designed for only one use"
+    },
+    {
+        "code": "D1106",
+        "definition": "Issues arise from using the device more than once despite its single-use design"
+    },
+    {
+        "code": "D1106",
+        "definition": "The device encounters problems when used multiple times contrary to its intended single-use design"
+    },
+    {
+        "code": "E0102",
+        "definition": "Damage to the brain"
+    },
+    {
+        "code": "E0102",
+        "definition": "Brain damage occurred"
+    },
+    {
+        "code": "E0102",
+        "definition": "The brain was damaged"
+    },
+    {
+        "code": "E010702",
+        "definition": "Loss of intellectual abilities interfering with an individual's social and occupational functions"
+    },
+    {
+        "code": "E010702",
+        "definition": "Loss of intellectual abilities affected social and occupational functions"
+    },
+    {
+        "code": "E010702",
+        "definition": "Intellectual abilities loss affected social and occupational functions"
+    },
+    {
+        "code": "E073301",
+        "definition": "Acute inflammation of the walls of the terminal bronchioles"
+    },
+    {
+        "code": "E073301",
+        "definition": "Inflammation of terminal bronchioles was acute"
+    },
+    {
+        "code": "E073301",
+        "definition": "Terminal bronchioles' walls inflamed acutely"
+    },
+    {
+        "code": "E0903",
+        "definition": "Partial or complete loss of the ability to detect or understand sounds resulting from damage to the outer, middle, or inner ear structures"
+    },
+    {
+        "code": "E0903",
+        "definition": "Loss of ability to detect or understand sounds resulted from ear structure damage"
+    },
+    {
+        "code": "E0903",
+        "definition": "Sound detection or understanding loss due to ear structure damage"
+    },
+    {
+        "code": "E1518",
+        "definition": "Children affected by toxins may be due to silicone breast implants and their effects on unborn children and from breastfeeding"
+    },
+    {
+        "code": "E1518",
+        "definition": "Toxins affecting children could result from silicone breast implants and their impact on unborn children and breastfeeding"
+    },
+    {
+        "code": "E1518",
+        "definition": "Silicone breast implants may cause toxins affecting children, impacting unborn children and breastfeeding"
+    },
+    {
+        "code": "F0101",
+        "definition": "A reduction in the desirable and beneficial effects resulting from a medical treatment"
+    },
+    {
+        "code": "F0101",
+        "definition": "Medical treatment resulted in reduced desirable and beneficial effects"
+    },
+    {
+        "code": "F0101",
+        "definition": "Reduction in desirable and beneficial effects from medical treatment"
+    },
+    {
+        "code": "F04",
+        "definition": "Patient diagnosis was clinically significant delayed as a consequence of device performance"
+    },
+    {
+        "code": "F04",
+        "definition": "Device performance caused clinically significant delay in patient diagnosis"
+    },
+    {
+        "code": "F04",
+        "definition": "Clinically significant delay in patient diagnosis due to device performance"
+    },
+    {
+        "code": "F1001",
+        "definition": "Patient treatment was absent as a consequence of device performance"
+    },
+    {
+        "code": "F1001",
+        "definition": "Device performance resulted in absence of patient treatment"
+    },
+    {
+        "code": "F1001",
+        "definition": "Absence of patient treatment due to device performance"
+    },
+    {
+        "code": "F1204",
+        "definition": "Irreversible deterioration of the state of health"
+    },
+    {
+        "code": "F1204",
+        "definition": "State of health irreversibly deteriorated"
+    },
+    {
+        "code": "F1204",
+        "definition": "Health state underwent irreversible deterioration"
+    },
+    {
+        "code": "F22",
+        "definition": "Diagnostic intervention needed to be completed that was not originally planned"
+    },
+    {
+        "code": "F22",
+        "definition": "Unplanned completion of diagnostic intervention was necessary"
+    },
+    {
+        "code": "F22",
+        "definition": "Completion of diagnostic intervention was required beyond initial plans"
+    },
+    {
+        "code": "G01007",
+        "definition": "The powder that reacts with the monomer liquid to form adhesive, resin, or cement"
+    },
+    {
+        "code": "G01007",
+        "definition": "Adhesive, resin, or cement forms through reaction of powder with monomer liquid"
+    },
+    {
+        "code": "G01007",
+        "definition": "Formation of adhesive, resin, or cement via powder reacting with monomer liquid"
+    },
+    {
+        "code": "G02003",
+        "definition": "A device designed to restore the capacity of a battery"
+    },
+    {
+        "code": "G02003",
+        "definition": "Battery capacity restoration device"
+    },
+    {
+        "code": "G02003",
+        "definition": "Device for restoring battery capacity"
+    },
+    {
+        "code": "G04029",
+        "definition": "A layer of material covering the surface of a device"
+    },
+    {
+        "code": "G04029",
+        "definition": "Device surface covered by material layer"
+    },
+    {
+        "code": "G04029",
+        "definition": "Material layer covers device surface"
+    },
+    {
+        "code": "G04094",
+        "definition": "The outer wrapping around a device which serves to contain, identify, and protect it prior to use"
+    },
+    {
+        "code": "G04094",
+        "definition": "Device's outer wrapping contains, identifies, and protects it before use"
+    },
+    {
+        "code": "G04094",
+        "definition": "Outer wrapping of device contains, identifies, and protects it prior to use"
+    },
+    {
+        "code": "G05003",
+        "definition": "A component designed to create or record a visual representation"
+    },
+    {
+        "code": "G05003",
+        "definition": "Visual representation created or recorded by designed component"
+    },
+    {
+        "code": "G05003",
+        "definition": "Component designed to create or record visual representation"
+    }
+]
