@@ -66,19 +66,33 @@ However, manually identifying the correct IMDRF codes from doctors' messages is 
     ```bash
     pip install -r requirements.txt
     ```
-
+4. **Possible dependencies problem??**
+    During the installation in a different computer I had to install the following
+    ```bash
+    pip install transformers[torch]
+    ```
 
 ## Running the Application
 
 1. **Start the Flask application:**
+    app.py executes the code first for the BERT model and then for LSTM and for Naive Bayes.  
+    When running for the first time, or re-running, if some error happened with running the python for each model, make sure you delete all the model folders in the directory.
+
+    **if app.py doesn't work because some model is crashing**
+   Try to delete all the directories that the models created (it has their respective name), and then run each script 1 by 1.  
+   **1st** run bert_model.py  
+   **2nd** run lstm_model.py  
+   **3rd** run naivebayes_model.py  
+   Lastly run ```python app.py ``` for opening the webapp with the models.  
+
 
     ```bash
     python app.py
     ```
 
-2. **Wait a bit...** The app.py will execute the three different Python scripts, each training a model and storing it in the repository directory.
+3. **Wait a bit...** The app.py will execute the three different Python scripts, each training a model and storing it in the repository directory.
 
-3. **Open your web browser and go to:**
+4. **Open your web browser and go to:**
 
     ```
     http://127.0.0.1:5000/
