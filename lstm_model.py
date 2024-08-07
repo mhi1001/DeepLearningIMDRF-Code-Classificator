@@ -26,7 +26,7 @@ data_df = data_df.explode("definition")
 data_df = data_df.reset_index(drop=True)
 
 # Load encodings from bert
-label_encoder = joblib.load(os.path.join("bert_model", "label_encoder.joblib"))
+label_encoder = joblib.load("encoder\label_encoder.joblib")
 
 # Encode labels using the loaded LabelEncoder
 data_df["label"] = label_encoder.transform(data_df["code"])

@@ -12,7 +12,7 @@ import sys
 
 # Load the LabelEncoder from BERT model
 bert_model_dir = "bert_model"
-label_encoder = joblib.load(os.path.join(bert_model_dir, "label_encoder.joblib"))
+label_encoder = joblib.load("encoder\label_encoder.joblib")
 
 MODEL_DIR = "naivebayes_model"
 MODEL_PATH = os.path.join(MODEL_DIR, "naivebayes_model")

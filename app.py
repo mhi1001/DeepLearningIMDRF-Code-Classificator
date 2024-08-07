@@ -56,7 +56,7 @@ nb_model = joblib.load("naivebayes_model/nb_model.joblib")
 nb_vectorizer = joblib.load("naivebayes_model/tfidf_vectorizer.joblib")
 
 # Load LabelEncoder
-label_encoder = joblib.load("bert_model/label_encoder.joblib")
+label_encoder = joblib.load("encoder\label_encoder.joblib")
 
 
 @app.route("/")
