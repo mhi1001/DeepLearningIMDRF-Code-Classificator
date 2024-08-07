@@ -55,7 +55,7 @@ else:
     print("Training new LSTM model...")
 
     model = Sequential()
-    model.add(Embedding(input_dim=5000, output_dim=64, input_length=100))
+    model.add(Embedding(input_dim=5000, output_dim=64, input_length=300))
     model.add(LSTM(64, return_sequences=True))
     model.add(LSTM(32))
     model.add(Dropout(0.3))
